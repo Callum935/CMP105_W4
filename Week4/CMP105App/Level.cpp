@@ -1,4 +1,5 @@
 #include "Level.h"
+#include "PLayer.h"
 
 Level::Level(sf::RenderWindow* hwnd, Input* in)
 {
@@ -8,10 +9,14 @@ Level::Level(sf::RenderWindow* hwnd, Input* in)
 	// initialise game objects
 	texture.loadFromFile("gfx/Mushroom.png");
 
-	testSprite.setTexture(&texture);
-	testSprite.setSize(sf::Vector2f(100, 100));
-	testSprite.setPosition(100, 100);
+	//testSprite.setTexture(&texture);
+	//testSprite.setSize(sf::Vector2f(100, 100));
+	//testSprite.setPosition(100, 100);
 
+	Mushroom.setTexture(&texture);
+	Mushroom.setSize(sf::Vector2f(100, 100));
+	Mushroom.setPosition(100, 100);
+	Mushroom.setInput(input);
 }
 
 Level::~Level()
@@ -27,13 +32,13 @@ void Level::handleInput(float dt)
 	{
 		window->close();
 	}
-
+	Mushroom.handleInput(dt);
 }
 
 // Update game objects
 void Level::update(float dt)
 {
-	
+	Mushroom.update(dt);
 }
 
 // Render level
@@ -41,7 +46,8 @@ void Level::render()
 {
 	beginDraw();
 
-	window->draw(testSprite);
+	//window->draw(testSprite);
+	window->draw(Mushroom);
 
 	endDraw();
 }
